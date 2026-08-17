@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <link rel="icon" type="image/png" href="assets/MRD.webp">  
+  <link rel="apple-touch-icon" href="assets/MRD.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MR Developers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&display=swap" rel="stylesheet">
+  <!-- Open Graph (WhatsApp, Facebook, Discord, LinkedIn) -->
+    <meta property="og:title" content="MR Developers">
+    <meta property="og:description" content="Mobile App Development, Web Development & Software Solutions">
+    <meta property="og:image" content="https://mr-developers.onrender.com/assets/MRDfull.webp">
+    <meta property="og:url" content="https://mr-developers.onrender.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="MR Developers">
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MR Developers">
+    <meta name="twitter:description" content="Mobile App Development, Web Development & Software Solutions">
+    <meta name="twitter:image" content="https://mr-developers.onrender.com/assets/MRDfull.webp">
+
+  <!--Disable right-click-->
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("contextmenu", function(e) {
+        if (e.target.tagName === "IMG") {
+          e.preventDefault();
+        }
+      });
+    });
+  </script>
+  
+  <style>
+
+    /*This import for (Fun play) Font style*/
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+    .text{font-family:'Press Start 2P', monospace;}
+
+    /*This code for (Fun play) effect*/
+    :root{--marquee: #FFC857;}
+    .brand{font-family:'Press Start 2P', monospace;font-size: 1.1rem;color: var(--marquee);text-shadow: 0 0 8px rgba(255,200,87,0.5);animation: flicker 1.0s infinite;}
+    @keyframes flicker{0%, 93%, 100% { opacity: 1; }94% { opacity: 0.55; }95% { opacity: 1; }96% { opacity: 0.4; }97% { opacity: 1; }}
+
+    /*StreamTAB logo style*/
+    .logo {font-family: 'Montserrat', sans-serif;font-size: 1.5rem;color: #ffffff;font-weight: 800;letter-spacing: -0.5px;text-decoration: none;display: flex;align-items: baseline;}
+    .logo span {color: #e11d48;}
+
+    /*Make text non-copyable*/
+    body {-webkit-user-select: none;-ms-user-select: none;user-select: none;}
+    
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #000; --ink: #f0f0f0; --muted: #999;
+      --accent: #00ff41; --accent2: #00cc33; --line: #1a1a1a;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--bg); color: var(--ink); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+
+    /* ══════════════════════════════════════════════════════
+       LOADING SCREEN - 3D GLOBE
+       ══════════════════════════════════════════════════════ */
+    #loader {
+      position: fixed; inset: 0; background: #000;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 10000; transition: opacity .6s ease, visibility .6s ease;
+    }
+    #loader.hidden { opacity: 0; visibility: hidden; }
+    
+    /* Globe Container */
+    .globe-container {
+      width: 120px; height: 120px;
+      perspective: 1000px;
+      margin-bottom: 2rem;
+    }
+    
+    /* 3D Globe */
+    .globe {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateGlobe 4s linear infinite;
+    }
+    
+    /* Globe Rings (Latitude) */
+    .globe-ring {
+      position: absolute;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      opacity: 0.6;
+      box-shadow: 0 0 8px rgba(0,255,65,.3);
+    }
+    .globe-ring:nth-child(1) { width: 100%; height: 100%; top: 0; left: 0; transform: rotateX(90deg); }
+    .globe-ring:nth-child(2) { width: 100%; height: 100%; top: 0; left: 0; transform: rotateX(90deg) rotateY(45deg); }
+    .globe-ring:nth-child(3) { width: 100%; height: 100%; top: 0; left: 0; transform: rotateX(90deg) rotateY(90deg); }
+    .globe-ring:nth-child(4) { width: 100%; height: 100%; top: 0; left: 0; transform: rotateY(0deg); }
+    .globe-ring:nth-child(5) { width: 100%; height: 100%; top: 0; left: 0; transform: rotateY(45deg); }
+    .globe-ring:nth-child(6) { width: 100%; height: 100%; top: 0; left: 0; transform: rotateY(90deg); }
+    
+    /* Globe Core */
+    .globe-core {
+      position: absolute;
+      width: 40%; height: 40%;
+      top: 30%; left: 30%;
+      background: radial-gradient(circle, var(--accent), transparent);
+      border-radius: 50%;
+      opacity: 0.4;
+      filter: blur(8px);
+    }
+    
+    @keyframes rotateGlobe {
+      0% { transform: rotateX(-15deg) rotateY(0deg); }
+      100% { transform: rotateX(-15deg) rotateY(360deg); }
+    }
+    
+    /* Loading Text */
+    .loading-text {
+      font-family: var(--mono);
+      font-size: .75rem;
+      color: var(--accent);
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    
+    .loading-dots::after {
+      content: '';
+      animation: dots 1.5s steps(4, end) infinite;
+    }
+    
+    @keyframes dots {
+      0%, 20% { content: ''; }
+      40% { content: '.'; }
+      60% { content: '..'; }
+      80%, 100% { content: '...'; }
+    }
+
+    /* ── CURSOR (desktop only, hidden on touch) ── */
+    #cursor, #cursor-ring { display: none; }
+    @media (pointer: fine) {
+      body { cursor: none; }
+      #cursor {
+        display: block; position: fixed; width: 10px; height: 10px;
+        background: var(--accent); border-radius: 50%;
+        pointer-events: none; z-index: 9999;
+        transform: translate(-50%,-50%); mix-blend-mode: screen;
+        transition: width .18s, height .18s;
+      }
+      #cursor-ring {
+        display: block; position: fixed; width: 34px; height: 34px;
+        border: 1px solid rgba(0,255,65,.42); border-radius: 50%;
+        pointer-events: none; z-index: 9998;
+        transform: translate(-50%,-50%);
+        transition: width .22s, height .22s, border-color .22s;
+      }
+      .cursor-grow #cursor { width: 18px; height: 18px; }
+      .cursor-grow #cursor-ring { width: 50px; height: 50px; border-color: rgba(0,255,65,.65); }
+      a, button, .skill-tag { cursor: none; }
+    }
+
+    /* ── PROGRESS BAR ── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent), #fff);
+      z-index: 9000; width: 0%;
+      box-shadow: 0 0 8px rgba(0,255,65,.7);
+      pointer-events: none; transition: width .08s linear;
+    }
+
+    /* ── MATRIX ── */
+    #matrix-canvas {
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0; pointer-events: none; opacity: .50;
+    }
+
+    /* ── PAGE WRAP ── */
+    .page-wrap { animation: pageIn .85s ease both; }
+    @keyframes pageIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 4rem;
+      background: rgba(0,0,0,.82); backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--line); z-index: 100;
+      transition: padding .35s, background .35s;
+    }
+    nav.scrolled { padding: .75rem 4rem; background: rgba(0,0,0,.97); }
+    .nav-logo { text-decoration: none; display: flex; align-items: center; transition: opacity .2s, filter .2s; }
+    .nav-logo::before { display: none; }
+    .nav-logo:hover { text-shadow: none; opacity: 0.88; filter: drop-shadow(0 0 10px rgba(55, 215, 49, 0.35)); }
+    .nav-logo-img { height: 52px; width: 52px; object-fit: cover; display: block; border-radius: 50%; border: 1.5px solid rgba(0, 0, 0, 0.25); background: #000; /*filter: drop-shadow(0 0 10px rgba(55, 215, 49, 0.35));*/ }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: .78rem; font-weight: 500; color: #bbb; letter-spacing: .1em; text-transform: uppercase; font-family: var(--mono); transition: color .2s; position: relative; padding-bottom: 4px; }
+    .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width .3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 4px; z-index: 200; background: none; border: none; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: var(--accent); transition: transform .3s, opacity .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* mobile overlay */
+    .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.97); z-index: 150; flex-direction: column; align-items: center; justify-content: center; gap: 2.8rem; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--mono); font-size: 1.5rem; color: #bbb; text-decoration: none; letter-spacing: .12em; text-transform: uppercase; transition: color .2s; }
+    .mobile-menu a:hover, .mobile-menu a:active { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero { min-height: 100svh; display: flex; align-items: center; padding: 8rem 4rem 4rem; position: relative; overflow: hidden; }
+    .hero-content { max-width: 750px; position: relative; z-index: 1; }
+    .hero-label { font-family: var(--mono); font-size: .75rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); font-weight: 400; margin-bottom: 1.5rem; display: flex; align-items: center; gap: .75rem; }
+    .hero-label::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent); }
+    .pulse-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; flex-shrink: 0; animation: pulse 2.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,255,65,.55)} 55%{box-shadow:0 0 0 8px rgba(0,255,65,0)} }
+    h1 { font-family: var(--serif); font-size: clamp(2.6rem,6vw,5.5rem); line-height: 1.06; margin-bottom: 1.5rem; font-weight: 700; color: var(--ink); }
+    h1 em { font-style: italic; color: var(--accent); }
+    .hero-bio { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin-bottom: 2.5rem; font-weight: 300; line-height: 1.85; }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .85rem 2rem; background: var(--accent); color: #000; text-decoration: none; font-family: var(--mono); font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; transition: background .2s, transform .15s, box-shadow .2s; border: none; }
+    .btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,255,65,.28); }
+    .btn-outline { background: transparent; color: var(--accent); border: 1px solid rgba(0,255,65,.6); }
+    .btn-outline:hover { background: rgba(0,255,65,.08); color: var(--accent); }
+    .scroll-hint { position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: .45rem; opacity: .35; font-family: var(--mono); font-size: .6rem; color: var(--accent); letter-spacing: .2em; text-transform: uppercase; animation: bounceDown 2.4s ease-in-out infinite; z-index: 1; }
+    .scroll-hint::after { content: ''; display: block; width: 1px; height: 32px; background: linear-gradient(to bottom, var(--accent), transparent); }
+    @keyframes bounceDown { 0%,100%{transform:translateX(-50%) translateY(0)} 55%{transform:translateX(-50%) translateY(8px)} }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 4rem; position: relative; z-index: 1; }
+    #about, #work, #contact { background: transparent; }
+    .section-sep { height: 1px; background: linear-gradient(90deg,transparent,rgba(0,255,65,.22),transparent); margin: 0 4rem; position: relative; z-index: 1; }
+    .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3.5rem; }
+    .section-num { font-family: var(--mono); font-size: .72rem; color: var(--accent); letter-spacing: .18em; opacity: .8; }
+    h2 { font-family: var(--serif); font-size: clamp(1.8rem,3vw,2.8rem); font-weight: 700; color: var(--ink); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .75s ease, transform .75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: .1s; }
+    .reveal-d2 { transition-delay: .22s; }
+    .reveal-d3 { transition-delay: .34s; }
+
+    /* ── ABOUT ── */
+    .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p { color: var(--muted); margin-bottom: 1.1rem; font-weight: 300; line-height: 1.95; }
+    .about-text p strong { color: var(--ink); font-weight: 500; }
+    .skills-list { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2rem; }
+    .skill-tag { padding: .35rem .9rem; border: 1px solid #2e2e2e; font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; color: var(--accent); background: rgba(0,255,65,.05); transition: border-color .2s, background .2s, transform .18s, box-shadow .18s; user-select: none; }
+    .skill-tag:hover { border-color: var(--accent); background: rgba(0,255,65,.11); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,255,65,.1); }
+    .about-aside { padding-left: 3rem; border-left: 1px solid #222; }
+    .stat-row { margin-bottom: 2.5rem; }
+    .stat-num { font-family: var(--mono); font-size: 3rem; line-height: 1; color: var(--accent); font-weight: 500; text-shadow: 0 0 24px rgba(0,255,65,.35); }
+    .stat-label { font-size: .8rem; color: var(--muted); margin-top: .35rem; letter-spacing: .04em; }
+
+    
+    
+    
+   
+    
+    /* ── PROJECTS ── */
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 1.25rem; background: transparent; }
+
+    .project-card {
+      background: rgba(4,4,4,.82);
+      backdrop-filter: blur(12px);
+      padding: 2.4rem;
+      transition: background .28s, transform .28s, box-shadow .28s, border-color .28s;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #1e1e1e;
+      border-radius: 18px;
+      isolation: isolate; /* keeps media/overlay contained to this card */
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg,transparent,var(--accent),transparent);
+      transform: scaleX(0); transform-origin: left; transition: transform .45s;
+      z-index: 3;
+    }
+    .project-card::after {
+      content: attr(data-num);
+      position: absolute; bottom: 1.5rem; right: 1.8rem;
+      font-family: var(--mono); font-size: 3.5rem; font-weight: 500;
+      color: rgba(255,255,255,.08); pointer-events: none; line-height: 1;
+      transition: color .28s;
+      z-index: 2;
+    }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-card:hover { background: rgba(9,9,9,.94); transform: translateY(-6px); box-shadow: 0 20px 56px rgba(0,255,65,.1); border-color: #2d2d2d; }
+    .project-card:hover::after { color: rgba(255,255,255,.14); }
+
+    /* ── Background media layer (image / gif / video) ── */
+    .card-media {
+      position: absolute; inset: 0; z-index: -1;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 50 ; filter: grayscale(40%) contrast(1.05);
+      transition: opacity .4s, transform .6s, filter .4s;
+      transform: scale(1.04);
+    }
+    .project-card:hover .card-media {
+      opacity: .62; transform: scale(1.1); filter: grayscale(0%) contrast(1.1);
+    }
+    .card-media-overlay {
+      position: absolute; inset: 0; z-index: -1;
+      background: linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.75) 60%, rgba(0,0,0,.9) 100%);
+    }
+
+    /* keep text readable above media */
+    .project-card .project-tag,
+    .project-card h3,
+    .project-card p,
+    .project-card .project-link { position: relative; z-index: 2; }
+
+    .project-tag { font-family: var(--mono); font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color:#50b349 !important; margin-bottom: 1rem; opacity: .85; }
+    .project-card h3 { font-family: var(--serif); font-size: 1.45rem; margin-bottom: .8rem; color: var(--ink); }
+    .project-card p { font-size: .87rem; color: var(--muted); font-weight: 300; margin-bottom: 1.8rem; line-height: 1.75; }
+    .project-link { font-family: var(--mono); font-size: 1.1rem; font-weight: 500; text-decoration: none; color: var(--accent2); letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid #2e2e2e; padding-bottom: 2px; transition: color .2s, border-color .2s, letter-spacing .25s; }
+    .project-link:hover { color: var(--accent); border-color: var(--accent); letter-spacing: .19em; }
+
+
+
+
+    
+
+    
+    
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+    .contact-text { font-size: 1rem; color: var(--muted); font-weight: 300; margin-bottom: 2rem; line-height: 1.95; }
+    .contact-links { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 2rem; }
+    .contact-link { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--muted); font-size: .88rem; transition: color .2s, transform .22s; }
+    .contact-link:hover { color: var(--accent); transform: translateX(6px); }
+    .contact-link span { font-family: var(--mono); font-weight: 500; min-width: 80px; color: var(--accent2); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
+    .contact-form { display: flex; flex-direction: column; gap: .75rem; }
+    
+    /* Standard Inputs */
+    .contact-form input, .contact-form textarea { 
+      background: rgba(6,6,6,.88); border: 1px solid #252525; color: var(--ink); 
+      padding: .85rem 1rem; font-family: var(--mono); font-size: .84rem; 
+      outline: none; transition: border-color .2s, box-shadow .2s, background .2s; 
+      width: 100%; letter-spacing: .02em; -webkit-appearance: none; border-radius: 0; 
+    }
+    .contact-form input::placeholder, .contact-form textarea::placeholder { color: #505050; }
+    .contact-form input:focus, .contact-form textarea:focus { 
+      border-color: var(--accent); box-shadow: 0 0 18px rgba(0,255,65,.1); background: rgba(0,255,65,.02); 
+    }
+    .contact-form textarea { height: 130px; resize: vertical; }
+
+    /* ── PHONE GROUP STYLES ── */
+    .phone-input-group { display: flex; gap: 0.5rem; }
+    
+    /* Dropdown Styling */
+    .phone-input-group select {
+      background: #000;
+      border: 1px solid #252525; 
+      color: var(--accent);
+      padding: .85rem .5rem; 
+      font-family: var(--mono); 
+      font-size: .84rem;
+      outline: none; 
+      width: 130px; 
+      flex-shrink: 0; 
+      letter-spacing: .02em;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+      cursor: pointer;
+      -webkit-appearance: none; 
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2300ff41%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right .7rem top 50%;
+      background-size: .65rem auto;
+    }
+
+    .phone-input-group select option {
+      background-color: #000;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      padding: 10px;
+    }
+    
+    .phone-input-group select:hover,
+    .phone-input-group select:focus {
+      border-color: var(--accent); 
+      box-shadow: 0 0 18px rgba(0,255,65,.1); 
+      background-color: #050505;
+    }
+
+    .phone-input-group input { flex-grow: 1; }
+    
+    @media (max-width: 480px) {
+      .phone-input-group { flex-direction: column; gap: 0.75rem; }
+      .phone-input-group select { width: 100%; }
+    }
+
+    .btn-submit { background: var(--accent); color: #000; border: none; cursor: pointer; padding: .9rem 2rem; font-family: var(--mono); font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; transition: background .2s, box-shadow .2s, transform .15s; align-self: flex-start; }
+    .btn-submit:hover { background: #fff; box-shadow: 0 0 28px rgba(0,255,65,.32); transform: translateY(-2px); }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── FOOTER ── */
+    footer { text-align: center; padding: 2.2rem; background: #000; border-top: 1px solid var(--line); font-family: var(--mono); font-size: .7rem; color: #666; letter-spacing: .1em; position: relative; z-index: 1; }
+    footer span { color: var(--accent); }
+
+    /* ── BACK TO TOP ── */
+    #back-top { position: fixed; bottom: 2rem; right: 2rem; width: 42px; height: 42px; background: rgba(0,0,0,.88); border: 1px solid rgba(0,255,65,.45); color: var(--accent); font-size: 1rem; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 500; opacity: 0; transform: translateY(12px); transition: opacity .3s, transform .3s, background .2s, box-shadow .2s; font-family: var(--mono); backdrop-filter: blur(10px); }
+    #back-top.show { opacity: 1; transform: translateY(0); }
+    #back-top:hover { background: var(--accent); color: #000; box-shadow: 0 0 18px rgba(0,255,65,.3); }
+
+    /* ── TOAST ── */
+    #toast { position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(14px); background: rgba(0,0,0,.92); border: 1px solid rgba(0,255,65,.45); color: var(--accent); font-family: var(--mono); font-size: .73rem; padding: .55rem 1.3rem; letter-spacing: .07em; z-index: 800; opacity: 0; transition: opacity .28s, transform .28s; pointer-events: none; backdrop-filter: blur(14px); white-space: nowrap; }
+    #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ── BLINK ── */
+    .blink { display: inline-block; width: 2px; height: 1em; background: var(--accent); margin-left: 4px; vertical-align: middle; animation: blink 1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: .9rem 1.5rem; }
+      nav.scrolled { padding: .65rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 4.5rem 1.5rem; }
+      #hero { padding: 6.5rem 1.5rem 4rem; min-height: 100svh; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-aside { padding-left: 0; border-left: none; border-top: 1px solid var(--line); padding-top: 2rem; }
+      .section-sep { margin: 0 1.5rem; }
+      #back-top { bottom: 1.2rem; right: 1.2rem; }
+      #toast { font-size: .68rem; padding: .5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════
+       LOADING SCREEN
+       ══════════════════════════════════════════════════════ -->
+  <div id="loader">
+    <div class="globe-container">
+      <div class="globe">
+        <div class="globe-ring"></div>
+        <div class="globe-ring"></div>
+        <div class="globe-ring"></div>
+        <div class="globe-ring"></div>
+        <div class="globe-ring"></div>
+        <div class="globe-ring"></div>
+        <div class="globe-core"></div>
+      </div>
+    </div>
+    <p class="loading-text">Loading<span class="loading-dots"></span></p>
+  </div>
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <div id="progress-bar"></div>
+  <canvas id="matrix-canvas"></canvas>
+  <button id="back-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <div id="toast" role="status"></div>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about"   onclick="closeMobileMenu()">About</a>
+    <a href="#services" onclick="closeMobileMenu()">Services</a>
+    <a href="#work"    onclick="closeMobileMenu()">Work</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  </div>
+
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo"><img src="assets/MRD.webp" alt="MR Developers" class="nav-logo-img"></a>
+    <ul class="nav-links">
+      <li><a href="#about"   data-section="about">About</a></li>
+      <li><a href="#services" data-section="services">Services</a></li>
+      <li><a href="#work"    data-section="work">Work</a></li>
+      <li><a href="#contact" data-section="contact">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-wrap">
+
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-content">
+        <p class="hero-label"><span class="pulse-dot"></span> Open for new projects</p>
+        <h1>We build things<br>for the <em class="text" style="font-size: clamp(24px, 6vw, 50px);">USERS.</em><span class="blink"></span></h1>
+        <p class="hero-bio">MR Developers is a development & design studio based in Colombo. We craft fast, purposeful digital experiences — from concept to code.</p>
+        <div class="hero-cta">
+          <a href="#work"    class="btn">View our work</a>
+          <a href="#contact" class="btn btn-outline">Get in touch</a>
+        </div>
+      </div>
+      <div class="scroll-hint">Explore</div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-header reveal">
+        <span class="section-num">// 01</span>
+        <h2 class="text" style="font-size: clamp(16px, 4vw, 30px);">Who we are</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal reveal-d1">
+          <p><strong>MR Developers</strong> is a forward-thinking digital development &amp; design studio. We specialize in building high-performance digital products that combine clean code with intentional design.</p>
+          <p>From applications, responsive websites and web apps to UI/UX design and brand identity, we bring ideas to life with precision and craft.</p>
+          <p>We believe great digital products should feel <strong>effortless</strong> — fast, intuitive, and built to last.</p>
+          <div class="skills-list">
+            <span class="skill-tag">HTML / CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Kotlin</span>
+            <span class="skill-tag">Game design</span>
+            <span class="skill-tag">2D @ 3D models</span>
+            <span class="skill-tag">Networking</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">UI / UX Design</span>
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Responsive Design</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Performance</span>
+          </div>
+        </div>
+        <div class="about-aside reveal reveal-d2">
+          <div class="stat-row">
+            <div class="stat-num" data-count="4">0</div>
+            <div class="stat-label">Years of building &amp; shipping</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-num" data-count="5">0</div>
+            <div class="stat-label">Projects shipped</div>
+          </div>
+          <div class="stat-row">
+            <div class="stat-num">&infin;</div>
+            <div class="stat-label">Passion for great products</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    
+    
+    
+    
+    
+    
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-header reveal">
+        <span class="section-num">// 02</span>
+        <h2 class="text" style="font-size: clamp(16px, 4vw, 30px);">What we do</h2>
+      </div>
+      <div class="projects-grid">
+
+      <!-- ═══════════════ PROJECT 1 ═══════════════ -->
+      <div class="project-card reveal reveal-d1" data-num="">
+
+        <!-- OPTION A: IMAGE -->
+        <!-- <img class="card-media" src="assets/project1.jpg" alt="" loading="lazy"> -->
+
+        <!-- OPTION B: VIDEO (autoplay/muted/loop, no controls) -->
+        
+        <video class="card-media" autoplay muted loop playsinline>
+          <source src="assets/web.mp4" type="video/mp4">
+        </video>
+        
+
+        <!-- OPTION C: GIF -->
+        <!--<img class="card-media" src="web.gif" alt="" loading="lazy">-->
+
+        <div class="card-media-overlay"></div>
+        <p class="project-tag">User friendly <br>websites @ web-application</br></p>
+        <h3>Websites</h3>
+        <p>We build interactive and user friendly websites @ web-application.</p>
+        <!-- <a href="#" class="project-link">View project &rarr;</a> -->
+      </div>
+
+      <!-- ═══════════════ PROJECT 2 ═══════════════ -->
+      <div class="project-card reveal reveal-d2" data-num="">
+
+        <!-- OPTION A: IMAGE -->
+        <img class="card-media" src="assets/apps.webp" alt="" loading="lazy">
+
+        <!-- OPTION B: VIDEO -->
+        <!--
+        <video class="card-media" autoplay muted loop playsinline>
+          <source src="assets/project2.mp4" type="video/mp4">
+        </video>
+        -->
+
+        <!-- OPTION C: GIF -->
+        <!--<img class="card-media" src="web.gif" alt="" loading="lazy">-->
+
+        <div class="card-media-overlay"></div>
+        <p class="project-tag">GAMES @ APPS</p>
+        <h3>Mobile Applications</h3>
+        <p>we build custom high quality mobile applications to enhance user experience and experience new things.</p>
+        <!-- <a href="#" class="project-link">View project &rarr;</a> -->
+      </div>
+
+      <!-- ═══════════════ PROJECT 3 ═══════════════ -->
+      <div class="project-card reveal reveal-d3" data-num="">
+
+        <!-- OPTION A: IMAGE -->
+        <img class="card-media" src="assets/cs.webp" alt="" loading="lazy">
+
+        <!-- OPTION B: VIDEO -->
+        <!--
+        <video class="card-media" autoplay muted loop playsinline>
+          <source src="assets/project3.mp4" type="video/mp4">
+        </video>
+        -->
+
+        <!-- OPTION C: GIF -->
+        <!--<img class="card-media" src="cs.gif" alt="" loading="lazy">-->
+
+        <div class="card-media-overlay"></div>
+        <p class="project-tag">build custom softwares for User requirement</p>
+        <h3>Custom Softwares</h3>
+        <p>We analyse the User requirements and needs and build Softwares for fulfill that needs.</p>
+        <!-- <a href="#" class="project-link">View project &rarr;</a> -->
+      </div>
+
+    </div>
+    </section>
+
+
+
+
+
+
+
+    
+
+    <!-- WORK -->
+    <section id="work">
+      <div class="section-header reveal">
+        <span class="section-num">// 03</span>
+        <h2 class="text" style="font-size: clamp(16px, 4vw, 30px);">Our projects</h2>
+      </div>
+      <div class="projects-grid">
+
+      <!-- ═══════════════ PROJECT 1 ═══════════════ -->
+      <div class="project-card reveal reveal-d1" data-num="">
+
+        <!-- OPTION A: IMAGE -->
+        <!-- <img class="card-media" src="assets/project1.jpg" alt="" loading="lazy"> -->
+
+        <!-- OPTION B: VIDEO (autoplay/muted/loop, no controls) -->
+        
+        <video class="card-media" autoplay muted loop playsinline>
+          <source src="assets/game.mp4" type="video/mp4">
+        </video>
+        
+
+        <!-- OPTION C: GIF -->
+        <!--<img class="card-media" src="game.gif" alt="" loading="lazy">-->
+
+        <div class="card-media-overlay"></div>
+        <p class="project-tag">Web App</p>
+        <h3><div class="brand">Fun play</div></h3><br>
+        <p>It's a online gaming side, With many instant playable games. Developed by -MR Developers-</p>
+        <a href="https://fun-play.onrender.com" class="project-link">View project &rarr;</a>
+      </div>
+
+      <!-- ═══════════════ PROJECT 2 ═══════════════ -->
+      <div class="project-card reveal reveal-d2" data-num="">
+
+        <!-- OPTION A: IMAGE -->
+        <img class="card-media" src="assets/location.webp" alt="" loading="lazy">
+
+        <!-- OPTION B: VIDEO -->
+        <!--
+        <video class="card-media" autoplay muted loop playsinline>
+          <source src="assets/project2.mp4" type="video/mp4">
+        </video>
+        -->
+
+        <!-- OPTION C: GIF -->
+        <!-- <img class="card-media" src="assets/project2.gif" alt="" loading="lazy"> -->
+
+        <div class="card-media-overlay"></div>
+        <p class="project-tag">Mobile application</p>
+        <h3>MR Location</h3><br>
+        <p>Fake your GPS location with a simple, fast, and reliable location spoofing app.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.mrdevelopers.mrlocation" class="project-link">Get in Play store &rarr;</a>
+      </div>
+
+      <!-- ═══════════════ PROJECT 3 ═══════════════ -->
+      <div class="project-card reveal reveal-d3" data-num="">
+
+        <!-- OPTION A: IMAGE -->
+        <!-- <img class="card-media" src="assets/project3.jpg" alt="" loading="lazy"> -->
+
+        <!-- OPTION B: VIDEO -->
+        
+        <video class="card-media" autoplay muted loop playsinline>
+          <source src="assets/streamTAB.mp4" type="video/mp4">
+        </video>
+        
+
+        <!-- OPTION C: GIF -->
+        <!--<img class="card-media" src="StreamTAB.gif" alt="" loading="lazy">-->
+
+        <div class="card-media-overlay"></div>
+        <p class="project-tag">Movies streaming</p>
+        <a class="logo"><div>stream<span>TAB</span></div></a><br>
+        <p>Watch free hit movies and premium TV series anytime with absolutely no subscription required.</p>
+        <a href="https://streamtab.onrender.com" class="project-link">start watching now &rarr;</a>
+      </div>
+
+    </div>
+    </section>
+
+
+
+
+    
+
+    <div class="section-sep"></div>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-header reveal">
+        <span class="section-num">// 04</span>
+        <h2 class="text" style="font-size: clamp(16px, 4vw, 30px);">Start a project</h2>
+      </div>
+      <div class="contact-grid">
+        <div class="reveal reveal-d1">
+          <p class="contact-text">Have a project in mind or ready to take your digital presence to the next level? We'd love to hear from you. Send us a message and we'll get back to you promptly.</p>
+          <div class="contact-links">
+            <a href="mailto:mrdevelopers.pvt@gmail.com" class="contact-link"><span>Email</span> mrdevelopers.pvt@gmail.com</a>
+            <a href="https://www.linkedin.com/company/mrdevelopers" class="contact-link"><span>LinkedIn</span> MR Developers</a>
+            <a href="https://github.com/MR-Developers" class="contact-link"><span>GitHub</span> MR-Developers</a>
+            <a href="https://www.instagram.com/mrdevelopers.pvt" class="contact-link"><span>Instagram</span> @mrdevelopers.pvt</a>
+            <a href="https://play.google.com/store/apps/dev?id=8352327469340561599" class="contact-link"><span>Google Play</span> MR.Developers</a>
+          </div>
+        </div>
+        <div id="formWrap" class="reveal reveal-d2">
+          <form id="contactForm" action="https://formsubmit.co/mrdevelopers.pvt@gmail.com" method="POST">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="">
+            
+            <div class="contact-form">
+              <input type="text"  name="name"  id="fieldName"    placeholder="// your name"       autocomplete="name" required/>
+              <input type="email" name="email" id="fieldEmail"   placeholder="// your email"      autocomplete="email" required/>
+              
+              <div class="phone-input-group">
+                <select name="country_code" id="fieldCountryCode" autocomplete="tel-country-code" required>
+                  <option value="" disabled selected>Code</option>
+                  <option value="+93">🇦🇫 +93</option>
+                  <option value="+355">🇦 +355</option>
+                  <option value="+213">🇩 +213</option>
+                  <option value="+376">🇦🇩 +376</option>
+                  <option value="+244">🇦🇴 +244</option>
+                  <option value="+54">🇦🇷 +54</option>
+                  <option value="+374">🇦🇲 +374</option>
+                  <option value="+61">🇦🇺 +61</option>
+                  <option value="+43">🇦 +43</option>
+                  <option value="+994">🇦🇿 +994</option>
+                  <option value="+973">🇧🇭 +973</option>
+                  <option value="+880">🇧🇩 +880</option>
+                  <option value="+375">🇧🇾 +375</option>
+                  <option value="+32">🇧🇪 +32</option>
+                  <option value="+501">🇧🇿 +501</option>
+                  <option value="+229">🇧🇯 +229</option>
+                  <option value="+975">🇧🇹 +975</option>
+                  <option value="+591">🇧🇴 +591</option>
+                  <option value="+387">🇧🇦 +387</option>
+                  <option value="+267">🇧🇼 +267</option>
+                  <option value="+55">🇧 +55</option>
+                  <option value="+673">🇧🇳 +673</option>
+                  <option value="+359">🇧🇬 +359</option>
+                  <option value="+226">🇧 +226</option>
+                  <option value="+257">🇧🇮 +257</option>
+                  <option value="+855">🇰🇭 +855</option>
+                  <option value="+237">🇨🇲 +237</option>
+                  <option value="+1">🇨🇦 +1</option>
+                  <option value="+236">🇨🇫 +236</option>
+                  <option value="+235">🇹🇩 +235</option>
+                  <option value="+56">🇨 +56</option>
+                  <option value="+86">🇨🇳 +86</option>
+                  <option value="+57">🇨🇴 +57</option>
+                  <option value="+269">🇰🇲 +269</option>
+                  <option value="+242">🇨🇬 +242</option>
+                  <option value="+506">🇨 +506</option>
+                  <option value="+385">🇭🇷 +385</option>
+                  <option value="+53">🇨🇺 +53</option>
+                  <option value="+357">🇨🇾 +357</option>
+                  <option value="+420">🇨🇿 +420</option>
+                  <option value="+45">🇩🇰 +45</option>
+                  <option value="+253">🇩🇯 +253</option>
+                  <option value="+593">🇪🇨 +593</option>
+                  <option value="+20">🇪🇬 +20</option>
+                  <option value="+503">🇸 +503</option>
+                  <option value="+240">🇬🇶 +240</option>
+                  <option value="+291">🇪🇷 +291</option>
+                  <option value="+372">🇪🇪 +372</option>
+                  <option value="+251">🇪🇹 +251</option>
+                  <option value="+679">🇫🇯 +679</option>
+                  <option value="+358">🇫🇮 +358</option>
+                  <option value="+33">🇫🇷 +33</option>
+                  <option value="+241">🇬🇦 +241</option>
+                  <option value="+220">🇬🇲 +220</option>
+                  <option value="+995">🇬🇪 +995</option>
+                  <option value="+49">🇩 +49</option>
+                  <option value="+233">🇬🇭 +233</option>
+                  <option value="+30">🇬🇷 +30</option>
+                  <option value="+502">🇬🇹 +502</option>
+                  <option value="+224">🇬🇳 +224</option>
+                  <option value="+245">🇬🇼 +245</option>
+                  <option value="+592">🇬🇾 +592</option>
+                  <option value="+509">🇭🇹 +509</option>
+                  <option value="+504">🇭🇳 +504</option>
+                  <option value="+852">🇭🇰 +852</option>
+                  <option value="+36">🇭 +36</option>
+                  <option value="+354">🇮🇸 +354</option>
+                  <option value="+91">🇮🇳 +91</option>
+                  <option value="+62">🇮🇩 +62</option>
+                  <option value="+98">🇮 +98</option>
+                  <option value="+964">🇮🇶 +964</option>
+                  <option value="+353">🇮🇪 +353</option>
+                  <option value="+972">🇮🇱 +972</option>
+                  <option value="+39">🇮🇹 +39</option>
+                  <option value="+225">🇨🇮 +225</option>
+                  <option value="+81">🇯🇵 +81</option>
+                  <option value="+962">🇯🇴 +962</option>
+                  <option value="+7">🇰 +7</option>
+                  <option value="+254">🇰🇪 +254</option>
+                  <option value="+965">🇰🇼 +965</option>
+                  <option value="+996">🇰🇬 +996</option>
+                  <option value="+856">🇱🇦 +856</option>
+                  <option value="+371">🇱 +371</option>
+                  <option value="+961">🇱🇧 +961</option>
+                  <option value="+266">🇱🇸 +266</option>
+                  <option value="+231">🇱🇷 +231</option>
+                  <option value="+218">🇱 +218</option>
+                  <option value="+423">🇱 +423</option>
+                  <option value="+370">🇱🇹 +370</option>
+                  <option value="+352">🇱🇺 +352</option>
+                  <option value="+853">🇲🇴 +853</option>
+                  <option value="+389">🇲 +389</option>
+                  <option value="+261">🇲🇬 +261</option>
+                  <option value="+265">🇲🇼 +265</option>
+                  <option value="+60">🇲 +60</option>
+                  <option value="+960">🇲🇻 +960</option>
+                  <option value="+223">🇲🇱 +223</option>
+                  <option value="+356">🇲🇹 +356</option>
+                  <option value="+222">🇲🇷 +222</option>
+                  <option value="+230">🇲 +230</option>
+                  <option value="+52">🇲🇽 +52</option>
+                  <option value="+373">🇲 +373</option>
+                  <option value="+377">🇲🇨 +377</option>
+                  <option value="+976">🇲🇳 +976</option>
+                  <option value="+382">🇲🇪 +382</option>
+                  <option value="+212">🇲 +212</option>
+                  <option value="+258">🇲🇿 +258</option>
+                  <option value="+95">🇲🇲 +95</option>
+                  <option value="+264">🇳 +264</option>
+                  <option value="+977">🇳🇵 +977</option>
+                  <option value="+31">🇳🇱 +31</option>
+                  <option value="+64">🇳🇿 +64</option>
+                  <option value="+505">🇳🇮 +505</option>
+                  <option value="+227">🇳🇪 +227</option>
+                  <option value="+234">🇳🇬 +234</option>
+                  <option value="+47">🇳🇴 +47</option>
+                  <option value="+968">🇴 +968</option>
+                  <option value="+92">🇵🇰 +92</option>
+                  <option value="+507">🇵🇦 +507</option>
+                  <option value="+675">🇵 +675</option>
+                  <option value="+595">🇵🇾 +595</option>
+                  <option value="+51">🇵🇪 +51</option>
+                  <option value="+63">🇵🇭 +63</option>
+                  <option value="+48">🇵 +48</option>
+                  <option value="+351">🇵🇹 +351</option>
+                  <option value="+974">🇶🇦 +974</option>
+                  <option value="+40">🇷🇴 +40</option>
+                  <option value="+7">🇷🇺 +7</option>
+                  <option value="+250">🇷 +250</option>
+                  <option value="+966">🇸🇦 +966</option>
+                  <option value="+221">🇸🇳 +221</option>
+                  <option value="+381">🇷🇸 +381</option>
+                  <option value="+248">🇸 +248</option>
+                  <option value="+232">🇸 +232</option>
+                  <option value="+65">🇸🇬 +65</option>
+                  <option value="+421">🇸 +421</option>
+                  <option value="+386">🇸 +386</option>
+                  <option value="+677">🇸🇧 +677</option>
+                  <option value="+252">🇸🇴 +252</option>
+                  <option value="+27">🇿 +27</option>
+                  <option value="+82">🇰🇷 +82</option>
+                  <option value="+211">🇸🇸 +211</option>
+                  <option value="+34">🇪🇸 +34</option>
+                  <option value="+94">🇱🇰 +94</option>
+                  <option value="+249">🇸 +249</option>
+                  <option value="+597">🇸🇷 +597</option>
+                  <option value="+268">🇸🇿 +268</option>
+                  <option value="+46">🇸 +46</option>
+                  <option value="+41">🇨🇭 +41</option>
+                  <option value="+963">🇸🇾 +963</option>
+                  <option value="+886">🇹 +886</option>
+                  <option value="+992">🇹 +992</option>
+                  <option value="+255">🇹🇿 +255</option>
+                  <option value="+66">🇹🇭 +66</option>
+                  <option value="+228">🇹🇬 +228</option>
+                  <option value="+216">🇹🇳 +216</option>
+                  <option value="+90">🇹 +90</option>
+                  <option value="+993">🇹🇲 +993</option>
+                  <option value="+256">🇺🇬 +256</option>
+                  <option value="+380">🇺🇦 +380</option>
+                  <option value="+971">🇦🇪 +971</option>
+                  <option value="+44">🇬🇧 +44</option>
+                  <option value="+1">🇺🇸 +1</option>
+                  <option value="+598">🇺 +598</option>
+                  <option value="+998">🇺🇿 +998</option>
+                  <option value="+678">🇻🇺 +678</option>
+                  <option value="+58">🇻🇪 +58</option>
+                  <option value="+84">🇻🇳 +84</option>
+                  <option value="+967">🇾🇪 +967</option>
+                  <option value="+260">🇿🇲 +260</option>
+                  <option value="+263">🇿🇼 +263</option>
+                </select>
+                <input type="tel" name="phone" id="fieldPhone" placeholder="// phone number" autocomplete="tel" required/>
+              </div>
+
+              <textarea name="message" id="fieldMessage" placeholder="// your message..." required></textarea>
+              <button type="submit" class="btn-submit" id="submitBtn">Send_message();</button>
+              <p id="formError" style="display:none;color:#ff4d4d;font-family:var(--mono);font-size:.73rem;margin-top:.5rem;">// Error: all fields required</p>
+            </div>
+          </form>
+        </div>
+        <div id="successMsg" style="display:none;padding:2rem 0;color:var(--accent);font-family:var(--mono);font-size:.9rem;line-height:1.8;">
+          // Success: message sent.<br>// I'll be in touch soon.
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Designed &amp; built by <span>MR Developers</span> &mdash; &copy; 2026. All rights reserved.</p>
+    </footer>
+
+  </div><!-- /.page-wrap -->
+
+  <script>
+  /* ══════════════════════════════════════════════════════
+     LOADER - Hide when page is loaded
+     ══════════════════════════════════════════════════════ */
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loader').classList.add('hidden');
+      }, 1500); // Minimum 1.5s display time
+    });
+
+
+  /* ══════════════════════════════════════════════════════
+     MATRIX — mobile-safe
+     ══════════════════════════════════════════════════════ */
+  (function () {
+    var canvas   = document.getElementById('matrix-canvas');
+    var ctx      = canvas.getContext('2d');
+    var chars    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789<>{}[]()=/\\;:.,!@#$%^&*+-_|?~';
+    var fontSize = 18;
+    var cols, drops, lastW = 0;
+
+    function initDrops(n) {
+      drops = [];
+      for (var i = 0; i < n; i++) drops[i] = Math.random() * -120;
+    }
+
+    function resize() {
+      var W = window.innerWidth;
+      var H = window.innerHeight;
+      var widthChanged = Math.abs(W - lastW) > 2;
+
+      canvas.width  = W;
+      canvas.height = H;
+
+      var newCols = Math.floor(W / fontSize);
+
+      if (widthChanged || !drops) {
+        lastW = W;
+        cols  = newCols;
+        initDrops(cols);
+      } else {
+        while (drops.length < newCols) drops.push(Math.random() * -120);
+        cols = newCols;
+      }
+    }
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0,0,0,0.06)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = fontSize + 'px JetBrains Mono, monospace';
+      for (var i = 0; i < cols; i++) {
+        var c = chars[Math.floor(Math.random() * chars.length)];
+        var b = Math.random();
+        ctx.fillStyle = b > .90 ? '#ffffff' : b > .60 ? '#00ff41' : '#00cc33';
+        ctx.fillText(c, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > .975) drops[i] = 0;
+        drops[i]++;
+      }
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
+    setInterval(draw, 40);
+  }());
+
+
+  /* ══════════════════════════════════════════════════════
+     CUSTOM CURSOR
+     ══════════════════════════════════════════════════════ */
+  if (window.matchMedia('(pointer: fine)').matches) {
+    var cur  = document.getElementById('cursor');
+    var ring = document.getElementById('cursor-ring');
+    var mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY;
+      cur.style.left = mx + 'px';
+      cur.style.top  = my + 'px';
+    });
+
+    (function animRing() {
+      rx += (mx - rx) * 0.13;
+      ry += (my - ry) * 0.13;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(animRing);
+    }());
+
+    document.querySelectorAll('a, button, .skill-tag, .project-card').forEach(function (el) {
+      el.addEventListener('mouseenter', function () { document.body.classList.add('cursor-grow'); });
+      el.addEventListener('mouseleave', function () { document.body.classList.remove('cursor-grow'); });
+    });
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     SCROLL — progress, nav shrink, active links, back-top
+     ══════════════════════════════════════════════════════ */
+  var navbar  = document.getElementById('navbar');
+  var backTop = document.getElementById('back-top');
+  var bar     = document.getElementById('progress-bar');
+
+  window.addEventListener('scroll', function () {
+    var scrolled = window.scrollY;
+    var total    = document.body.scrollHeight - window.innerHeight;
+
+    bar.style.width = (total > 0 ? (scrolled / total * 100) : 0) + '%';
+    navbar.classList.toggle('scrolled', scrolled > 60);
+    backTop.classList.toggle('show',    scrolled > 400);
+
+    ['about', 'work', 'contact'].forEach(function (id) {
+      var sec  = document.getElementById(id);
+      var link = document.querySelector('[data-section="' + id + '"]');
+      if (!sec || !link) return;
+      var r = sec.getBoundingClientRect();
+      link.classList.toggle('active', r.top <= 120 && r.bottom > 120);
+    });
+  }, { passive: true });
+
+
+  /* ══════════════════════════════════════════════════════
+     SCROLL REVEAL
+     ══════════════════════════════════════════════════════ */
+  var revealObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function (el) { revealObs.observe(el); });
+
+
+  /* ══════════════════════════════════════════════════════
+     COUNT-UP NUMBERS
+     ══════════════════════════════════════════════════════ */
+  var counted = false;
+  new IntersectionObserver(function (entries) {
+    if (!entries[0].isIntersecting || counted) return;
+    counted = true;
+    document.querySelectorAll('[data-count]').forEach(function (el) {
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var step   = Math.round(1200 / target);
+      var n = 0;
+      var t = setInterval(function () {
+        n++;
+        el.textContent = n + '+';
+        if (n >= target) { clearInterval(t); el.textContent = target + '+'; }
+      }, step);
+    });
+  }, { threshold: 0.5 }).observe(document.getElementById('about'));
+
+
+  /* ══════════════════════════════════════════════════════
+     TOAST
+     ══════════════════════════════════════════════════════ */
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function () { t.classList.remove('show'); }, 2600);
+  }
+
+
+  /* ══════════════════════════════════════════════════════
+     FORM SUBMIT (BACKGROUND - EMAIL)
+     ══════════════════════════════════════════════════════ */
+  var form = document.getElementById('contactForm');
+  var submitBtn = document.getElementById('submitBtn');
+  var formWrap = document.getElementById('formWrap');
+  var successMsg = document.getElementById('successMsg');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    var name = document.getElementById('fieldName').value.trim();
+    var email = document.getElementById('fieldEmail').value.trim();
+    var phoneCode = document.getElementById('fieldCountryCode').value;
+    var phone = document.getElementById('fieldPhone').value.trim();
+    var msg = document.getElementById('fieldMessage').value.trim();
+    var errEl = document.getElementById('formError');
+
+    if (!name || !email || !msg || !phone || !phoneCode) {
+      errEl.style.display = 'block';
+      return;
+    }
+    errEl.style.display = 'none';
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    var formData = new FormData(form);
+    var fullPhone = phoneCode + ' ' + phone;
+    formData.append('phone', fullPhone);
+
+    fetch('https://formsubmit.co/ajax/ihshanmr@gmail.com', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      formWrap.style.display = 'none';
+      successMsg.style.display = 'block';
+      showToast('// Message sent successfully!');
+      form.reset();
+    })
+    .catch(error => {
+      showToast('// Error: Check connection');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send_message();';
+    });
+  });
+
+
+  /* ══════════════════════════════════════════════════════
+     SMOOTH NAV LINKS
+     ══════════════════════════════════════════════════════ */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+
+  /* ══════════════════════════════════════════════════════
+     SKILL TAG — click to copy
+     ══════════════════════════════════════════════════════ */
+  document.querySelectorAll('.skill-tag').forEach(function (tag) {
+    tag.addEventListener('click', function () {
+      if (navigator.clipboard) navigator.clipboard.writeText(tag.textContent);
+      showToast('// Copied: ' + tag.textContent);
+    });
+  });
+
+
+  /* ══════════════════════════════════════════════════════
+     HAMBURGER MENU
+     ══════════════════════════════════════════════════════ */
+  function toggleMobileMenu() {
+    var hb   = document.getElementById('hamburger');
+    var menu = document.getElementById('mobileMenu');
+    hb.classList.toggle('open');
+    menu.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMobileMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  </script>
+</body>
+</html>
